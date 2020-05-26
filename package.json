@@ -1,0 +1,31 @@
+{
+  "name": "ES6_webPack_study",
+  "version": "1.0.0",
+  "description": "es6模块化及webpack打包",
+  "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "css-loader": "^3.5.3",
+    "html-webpack-plugin": "^4.3.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^3.12.0",
+    "webpack-dev-server": "^2.11.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "npx webpack ./src/index.js -o ./dist/main.js --mode=development",
+    "build": "webpack",
+    "dev": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Reco-P/ES6_webPack_study.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Reco-P/ES6_webPack_study/issues"
+  },
+  "homepage": "https://github.com/Reco-P/ES6_webPack_study#readme"
+}
