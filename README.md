@@ -259,4 +259,41 @@ es6语法,模块化及webpack打包
    	return fn(x - 1);
    }
    console.log(fn(10))
+   
+```
+### 字符串的扩展与改进
+```
+新增方法
+1. 处理超过两个字符（四字节）的异体字， ES6新增了 codePointAt（） 方法
+2. 对于超过两个字符的马甸，可以通过ES6新增的 String.fromCodePoint() 
+  console.log(String.fromCodePoint(134071));
+   
+3. ES6提供的 normalize() 方法用于有音标的符号组合形成统一
+4. ES6提供了三种判断字符串的方法 includes(), startWith(), endsWith(),若找到返回true
+   console.log('abc'.includes('a'))   // true
+   console.log('abc'.startsWith('a'))  // true
+   console.log('abc'.endsWith('c'))  // true
+   
+5. repeat() 重复字符串， padStart() 补全字符串头部, endStart() 补全字符串尾部
+   console.log('x'.repeat(2))
+   console.log('x'.padStart(2,'0'))   // 前补0，补全后一共两位
+   console.log('x'.padEnd(2,'0'))  // 尾补0，补全后一共两位
+
+```
+```
+模板字符串
+1. 反引号实现变量解析--可用于字符串拼接
+   let name = 'Mr.z',
+       age = 22;
+   console.log(`名字: ${name}, 年龄: ${age}`)
+2. 支持表达式
+   console.log(`${1+1}`)
+   
+3. 支持嵌套
+   console.log(`${true ? (true ? `${2}` : `${3}`) : 'false' }`)
+   
+4. 可用String.raw来得到原生字符串
+   console.log(String.raw`我\n是`);
+   
+
 ```

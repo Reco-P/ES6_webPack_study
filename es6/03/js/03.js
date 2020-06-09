@@ -49,12 +49,31 @@
 // 	return other[0] + other[1];
 // }
 // console.log(fn(1,2))
-'use strict'
+// 'use strict'
 
-function fn (x) {
-	if (x<=1) {
-		return 1;
-	}
-	return fn(x - 1);
-}
-console.log(fn(10))
+// function fn (x) {
+// 	if (x<=1) {
+// 		return 1;
+// 	}
+// 	return fn(x - 1);
+// }
+// console.log(fn(10))
+
+// console.log(String.fromCodePoint(134071));
+// console.log('abc'.includes('a'))
+// console.log('abc'.startsWith('a'))
+// console.log('abc'.endsWith('c'))
+
+// console.log('x'.repeat(2))
+// console.log('x'.padStart(2,'0'))
+// console.log('x'.padEnd(2,'0'))
+
+// let name = 'Mr.z',
+//     age = 22;
+// console.log(`名字: ${name}, 年龄: ${age}`)
+
+// console.log(`${1+1}`)
+
+// console.log(`${true ? (true ? `${2}` : `${3}`) : 'false' }`)
+
+// console.log(String.raw`我\n是`);
