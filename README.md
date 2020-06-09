@@ -33,12 +33,12 @@ es6语法,模块化及webpack打包
    console.log(value)  //报错
    
    {
-	   let value = 10;
+	 let value = 10;
    }
 6. 块级作用域内的函数声明，在全局作用域内依旧可以访问
 7. 解决方式是：使用函数表达式的方式创建
   {
-	  let fun = function(){};
+	let fun = function(){};
   }
 ```
 
@@ -160,4 +160,103 @@ es6语法,模块化及webpack打包
    console.log(obj.fn3.name)
    console.log((new Function()).name)   // anonymous 匿名函数
    
+```
+
+### 箭头函数和this
+```
+1. 箭头函数
+   let fn = name => name;
+   console.log(fn('Mr.z'))
+   
+   function fn(name){
+   	return name
+   }
+   
+2. 箭头函数也可以传递两个或以上的参数，并实现运算后返回
+   let fn = (x, y) => x+y;
+   
+3. 定义的函数不需要传参的话，可以直接用（）
+   let fn = () => '123';
+   
+4. 如果函数体需要更复杂的操作，箭头函数右侧使用传统函数体
+   let fn = (x, y) =>{
+	   return x + y;
+   }
+   
+5. 自执行函数也可以用箭头函数创建
+   ((age) => {
+   	console.log(age)
+   })('22');
+   
+   (function(age){
+	   console.log(age)
+   })('22');
+ 
+```
+```
+1. 绑定this  ES中的典型问题，this指向问题，当对象中包含了类似setTimeout函数内部，this的指向就会发生问题
+   let obj = {
+   	name: 'Mr.z',
+   	age: 22,
+   	fn: function(){
+   		setTimeout(function(){
+   			console.log(this.name + ',' + this.age);  // 此时this指向window
+   		}, 500)
+   	}
+   }
+   obj.fn();  // 输出 undefined,undefined
+   
+   解决方式： 1.将this在setTimeout外部进行赋值保存  2.箭头函数，箭头函数中的this是最外层的函数绑定，不受内部影响
+   let obj = {
+   	name: 'Mr.z',
+   	age: 22,
+   	fn: function(){
+   		_this = this;          // 将this在setTimeout外部进行赋值保存
+   		setTimeout(function(){
+   			console.log(_this.name + ',' + _this.age); 
+   		}, 500)
+   	}
+   };
+   obj.fn();
+   
+   let obj = {
+   	name: 'Mr.z',
+   	age: 22,
+   	fn: function(){
+   		_this = this;
+   		setTimeout(() => console.log(_this.name + ',' + _this.age), 500)    //使用箭头函数
+   	}
+   };
+   obj.fn();
+   
+```
+```
+箭头函数扩展与尾调用
+
+1. 箭头函数也支持一些内置函数的使用，比如 sort排序
+   let arr = [3, 2, 1].sort((a, b) => a-b);
+   console.log(arr)
+   
+2. 箭头函数不支持arguments绑定，请直接使用...other模式 
+   let fn = (...other) => {
+   	return other[0] + other[1];
+   }
+   console.log(fn(1,2))
+   
+3. 箭头函数和普通函数一样，可以用typeof 和 instanceof 验证
+
+4. 尾调用：即在一个函数的最后可执行的一步调用了其他函数
+   尾调优化：原因： 每次尾调用都会创建栈帧，如果尾调次数过多，则可能会出现程序问题
+   必须满足下面条件，才可执行严格模式下的优化
+   1. 尾调用必须 return 返回
+   2. 尾调用 return 返回不得含其他操作
+   'use strict'
+   
+   function fn (x) {
+   	if (x<=1) {
+   		return 1;
+   	}
+   	return fn(x - 1);
+   }
+   console.log(fn(10))
 ```
