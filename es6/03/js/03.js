@@ -77,3 +77,15 @@
 // console.log(`${true ? (true ? `${2}` : `${3}`) : 'false' }`)
 
 // console.log(String.raw`我\n是`);
+
+// console.log((/?{2}/u).test(''));
+
+// let text = 'xxx_xx_x_';
+// let patt = /x+_/y;
+// console.log(patt.exec(text))  // [ 'xxx_', index: 0, input: 'xxx_xx_x_', groups: undefined ]
+// console.log(patt.exec(text))  // [ 'xx_', index: 4, input: 'xxx_xx_x_', groups: undefined ]
+// console.log(patt.exec(text))  // [ 'x_', index: 7, input: 'xxx_xx_x_', groups: undefined ]
+// console.log(patt.flags)
+   let regex = new RegExp(/xyz/i, 'g');
+   console.log(regex.flags)
+

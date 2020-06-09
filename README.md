@@ -295,5 +295,32 @@ es6语法,模块化及webpack打包
 4. 可用String.raw来得到原生字符串
    console.log(String.raw`我\n是`);
    
-
+```
+### 正则的扩展改进
+```
+1. ES6提供了u修饰符， 对占两个字符特殊字进行正则识别
+   /?{2}/.test('')  // false
+   /?{2}/u.test('')  // true
+   
+2. ES6提供了 y 修饰符，它的作用是匹配过一次后继续往下匹配
+   let text = 'xxx_xx_x_';
+   let patt = /x+_/y;
+   console.log(patt.exec(text))  // [ 'xxx_', index: 0, input: 'xxx_xx_x_', groups: undefined ]
+   console.log(patt.exec(text))  // [ 'xx_', index: 4, input: 'xxx_xx_x_', groups: undefined ]
+   console.log(patt.exec(text))  // [ 'x_', index: 7, input: 'xxx_xx_x_', groups: undefined ]
+   console.log(patt.flags)   // y
+   
+3. 对于 y 修饰符， ES6提供了 stikcy 属性来检测是否存在 y 修饰符
+   console.log(patt.stikcy)
+   
+4. ES6提供了 flags 属性，用于返回正则使用的修饰符名称
+   
+5. .表示匹配所有，除了终止符。换行\n，等使用 s 修饰符匹配
+   let text = 'a\nbc';
+   let patt = /x.+bc/s;
+   console.log(patt.test(text));
+   
+6. ES6支持修饰符替换，之前会报错
+   let regex = new RegExp(/xyz/iu, 'g');
+   console.log(regex.flags)  // g
 ```
