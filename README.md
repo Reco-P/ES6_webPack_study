@@ -344,6 +344,56 @@ es6语法,模块化及webpack打包
    console.log(Math.sign(10));  // 判断正负，0，NaN  正数返回1，负数返回-1  0返回0, NaN返回NaN
    
 ```
-### 
+### 数组的扩展与改进
 ```
+扩展运算符
+1. ES6提供了(...) 三点符号将数组转换为逗号分割
+   function fn(x, y) {
+   	return x + y;
+   }
+   
+   console.log(fn(...[1,2]))
+   
+2. 扩展用法，
+   console.log(Math.max(...[3,2,1]))   // 求最大值
+   console.log([...[1,2],...[3,4]])    // 合并数组
+   
+```
+```
+方法的扩展
+1. ES6提供了Array.of()方法，主要目的是弥补Array的不足
+   let arr1 = Array(3);
+   let arr = Array.of(3);
+   console.log(arr)   // [ 3 ]  
+   console.log(arr1)  //[  <3 empty items> ]  3位的空数组
+   
+2. ES6提供了 Array.from() 方法，将类似数组的对象或者遍历转换为真正的数组
+   转换数组的要求比较严格：1. key必须是数值或者字符串  2. length设置长度， 而且key在范围内
+   var obj = {
+   	0: 'name',
+   	1: 'age',
+   	2: 'gender',
+   	length: 3
+   }
+   
+   console.log(Array.from(obj))  // [ 'name', 'age', 'gender' ]
+  
+3. ES6提供了	find() 和 findIndex() 方法，用于查找数组中第一个匹配的值
+   // 参数是一个回调函数，可以使用箭头函数
+   let arr = [10,20,30,40,50];
+   console.log(arr.find(value => value === 20))  // 20
+   console.log(arr.find(value => value > 20))  // 30
+   console.log(arr.findIndex(value => value === 20))  // 1
+   
+4. ES6提供了 fill() 方法，可以填充重写数组中的元素值
+   let arr = [1,2,3,4,5];
+   console.log(arr.fill('a'))  // [ 'a', 'a', 'a', 'a', 'a' ]
+   
+   let arr = [1,2,3,4,5];
+   console.log(arr.fill('a',1,3))  // [ 1, 'a', 'a', 4, 5 ]  从第2位开始到第4位结束 替换为 a  [1,3)
+   
+5. ES6提供了 copyWithin 方法, 从数组内部赋值, 然后粘贴到指定位置
+   let arr = [1,2,3,4,5];
+   // 从0开始复制  值从索引2开始粘贴  参数3设置结束粘贴索引值
+   console.log(arr.copyWithin(2,0))  // [ 1, 2, 1, 2, 3 ]
 ```
