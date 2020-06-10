@@ -82,16 +82,34 @@
 // console.log(f.fn())
 // console.log(Object.getPrototypeOf(f) === obj)   // 检测obj是否是f的原型对象
 
-var obj = {
-	fn1(){
-		return 'fn1'
-	}
-}
+// var obj = {
+// 	fn1(){
+// 		return 'fn1'
+// 	}
+// }
 
-let f = {
-	fn(){
-		return super.fn1() + ', extend'
-	}
-};
-Object.setPrototypeOf(f,obj)  // 设置f的原型对象为 obj
-console.log(f.fn())  // fn1, extend
+// let f = {
+// 	fn(){
+// 		return super.fn1() + ', extend'
+// 	}
+// };
+// Object.setPrototypeOf(f,obj)  // 设置f的原型对象为 obj
+// console.log(f.fn())  // fn1, extend
+
+
+// let str1 = Symbol();   // 不支持new Symbol
+// let str2 = Symbol();
+// console.log(str1 === str2)  // false
+
+// let str1 = Symbol('字符串');
+// console.log(str1)  // 输出：Symbol(字符串)
+
+let a = Symbol();
+let b = Symbol();
+
+let obj = {
+	[a]: 'name1',
+	[b]: 'name2'
+}
+console.log(obj)   // { [Symbol()]: 'name1', [Symbol()]: 'name2' }
+console.log(obj[a])  // name1

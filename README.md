@@ -480,3 +480,29 @@ es6语法,模块化及webpack打包
    console.log(f.fn())  // fn1, extend
    
 ```
+### Symbol类型和属性
+```
+Symbol类型
+1. ES5新增了Symbol基础数据类型，表示独一无二的值，类似ID
+   let str1 = Symbol();   // 不支持new Symbol
+   let str2 = Symbol();
+   console.log(str1 === str2)  // false
+   
+2. 在Symbol()中的参数，是对变量的描述，程序无法访问，只能日志打印
+   let str1 = Symbol('字符串');
+   console.log(str1)  // 输出: Symbol(字符串)
+   
+```
+```
+Symbol属性
+1. 最常用的是作为对象属性
+   let a = Symbol();
+   let b = Symbol();
+   
+   let obj = {
+   	[a]: 'name1',
+   	[b]: 'name2'
+   }
+   console.log(obj)   // { [Symbol()]: 'name1', [Symbol()]: 'name2' }
+   console.log(obj[a])  // name1
+```
