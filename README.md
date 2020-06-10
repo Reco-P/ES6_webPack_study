@@ -701,5 +701,53 @@ p1.then((value) => {
    	console.log(value)
    });
    
-8. 
+```
+### 代理Proxy
+```
+1. 什么是代理? 即 给目标对象封装一层拦截, 外界访问必须通过这层拦截
+   let obj = {
+   	name: 'Mr.z',
+   	age: 22,
+   	gender: '男'
+   }
+   
+   let p = new Proxy(obj, {  //参数一 拦截的目标对象， 参数二 拦截行为
+   	get(target, property){
+   		// return 'fail';
+   		if(property === 'age'){
+   			return target[property];
+   		}else{
+   			return 'fail';
+   		}
+   	}
+   });
+   
+   console.log(p.name)  // fail
+   console.log(p.age)  // 22
+   
+2. 如果代理对象展示合适的值，可以通过 get() 的两个参数实现（可以进行验证与修改等）
+   get(target, property){
+   	if(property === 'age'){
+   		return target[property] - 20;
+   	}
+   }
+   
+3. 也可以通过 set() 方法来对代理对象的属性进行赋值
+   set(target, property, value){
+   	if(property === 'age'){
+   		target[property] = value;
+   	}
+   }
+   
+   p.age = 30;
+   console.log(p.age);  // 30
+
+```
+```
+小结
+1. 代理并不是复制目标对象, 只是拦截目标对象, 更改默认行为
+2. 代理可以使用 set() 和 get() 方法，对目标对象的数据进行过滤和验证
+3. 代理对象中任何未公开或者不存在的属性, 可自定义返回内容
+4. 代理可以阻止赋值的默认行为, 直接 return false
+
 ```
