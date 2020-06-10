@@ -323,4 +323,27 @@ es6语法,模块化及webpack打包
 6. ES6支持修饰符替换，之前会报错
    let regex = new RegExp(/xyz/iu, 'g');
    console.log(regex.flags)  // g
+   
+```
+### 数值扩展
+```
+1. ES6明确二进制，八进制， 十六进制分别用 0b， 0o， 0x作为前缀
+   console.log(Number('0b11'));
+   console.log(Number('0o11'));
+   console.log(Number('0x11'));
+   
+2. ES6提供了 Number.isFinitel(), Number.isNaN() 判断数值与NaN
+3. ES6提供了 Number.parseInt(), Number.parseFloat() 转换整型与浮点型
+4. ES6提供了Number.isInteger(), 来判断参数是否是一个整形
+5. ES6提供了一个常量，值特别小，用于判断是否得到正确结果  Number.EPSILON
+6. ES6新增了一个指数运算符 ** ,并且可以进行赋值运算
+   console.log(2 ** 2)
+
+7. Math对象新增了一些方法， .trunc(), .sign() 等
+   console.log(Math.trunc(5.55));    // 去掉小数部分
+   console.log(Math.sign(10));  // 判断正负，0，NaN  正数返回1，负数返回-1  0返回0, NaN返回NaN
+   
+```
+### 
+```
 ```
