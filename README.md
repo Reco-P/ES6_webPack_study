@@ -608,6 +608,98 @@ Symbol属性
    // [ 3, 4 ]
    // [ 4, 5 ]
    
-4. 
+```
+### 异步Promise
+```
+1. Promise: 异步通信编程的一种解决方案
+   let p = new Promise((resolve, reject) => {
+   	if(true){
+   		resolve('执行成功')
+   	}else{
+   		reject('执行失败')
+   	}
+   });
    
+   p.then((value) => {
+   	console.log(value);
+   }).catch((reason) => {
+   	console.log(reason)
+   });
+   或
+   p.then((value) =>{
+   	console.log(value);
+   },(reason) => {
+   	console.log(reason)
+   });
+   
+```
+```
+实例测试
+let p1 = new Promise((resolve, reject) => {
+	setTimeout(() => {
+		resolve('1.异步')
+	}, 3500)
+});
+
+let p2 = new Promise((resolve, reject) => {
+	setTimeout(() => {
+		resolve('2.异步')
+	}, 800)
+});
+
+let p3 = new Promise((resolve, reject) => {
+	setTimeout(() => {
+		resolve('3.异步')
+	}, 1500)
+});
+
+p1.then((value) => {
+	console.log(value);  // 调用p1
+	return p2;
+}).then((value) => {
+	console.log(value);  // 调用p2
+	return p3;
+}).then((value) => {
+	console.log(value)  // 调用p3
+});
+//1.异步
+//2.异步
+//3.异步
+
+```
+### Promise状态特点
+```
+1. Promise解决了异步多层回调混乱的问题
+2. Promise对象异步操作的三种状态
+   Pending(进行中)
+   Fulfilled(已成功)
+   Rejected(已失败)
+3. 当异步操作执行后, 它得到的结果来决定其状态,其他任何操作都无法改变
+4. Pending -> Fulfilled -> Resolve
+   Pending -> Rejected -> Resolve
+   
+5. Promise提供了一个 all() 方法，可以简化多个实例调用的输出排序
+   let p = Promise.all([p1,p2,p3]) // 参数为数组
+   
+   p.then((value) => {
+   	console.log(value)  // [ '1.异步', '2.异步', '3.异步' ]
+   });
+   
+6. Promise提供了 race() 方法, 只输出第一个改变状态的实例
+   let p = Promise.race([p1,p2,p3])  // 参数为数组
+   p.then((value) => {
+   	console.log(value)  // 2.异步
+   });
+   
+7. Promise提供了 resolve() 和 reject() 直接返回一个成功或者失败的案例
+   let p1 = Promise.resolve('成功');
+   let p2 = Promise.reject('失败')
+   p1.then((value) => {
+   	console.log(value)
+   });
+   p2.then((value) => {
+   	console.log(value)
+   });
+   
+8. 
 ```
