@@ -505,4 +505,109 @@ Symbol属性
    }
    console.log(obj)   // { [Symbol()]: 'name1', [Symbol()]: 'name2' }
    console.log(obj[a])  // name1
+   
+```
+### Set数据集合
+```
+1.ES6新提供了Set集合, Set集合是一种无重复元素的列表 使用 new Set() 方法创建 Set 集合
+   let arr = new Set();
+   arr.add(1);
+   arr.add(2);
+   arr.add(2);
+   arr.add('2');
+   console.log(arr)  // Set { 1, 2, '2' }
+   console.log(arr.length)  // undefined
+   console.log(arr.size)  // 3
+   
+2. 使用 hash() 方法查找是否存在指定元素
+   console.log(arr.has(2))  // true
+   
+3. 使用 delete() 删除指定元素， clear() 清空元素
+   console.log(arr.delete(2))  // true
+   console.log(arr)  // Set { 1, '2' }
+   
+   console.log(arr.clear())  // Set {}
+   
+4. 使用 ... 将 Set集合转换为数组
+   console.log([...arr])
+   
+5. Set集合还提供了针对对象的Weak Set 集合，添加非对象类型会报错
+6. Weak Set集合支持 add(), has(), delete() 方法
+7. Weak Set不支持遍历, 内部隐藏(不支持查看), 不支持foreach和size
+8. 对于应用场景来说, 存放对象的弱引用, 不用担心对象被回收后引发的问题
+ 
+```
+### Map数据集合
+```
+1. ES6提供了Map数据集合, 是一种以键值对存储的有序列表
+   let map = new Map();
+   map.set('name', 'Mr.z');
+   map.set('age', 22);
+   console.log(map);  // Map { 'name' => 'Mr.z', 'age' => 22 }
+   console.log(map.get('name')) // Mr.z
+   
+2. 可以使用 has() 检测, delete() 删除, clear() 清空等对Map集合的操作
+
+3. foreach遍历
+   map.foreach((value, key, m) => {});
+   
+4. Map集合还提供了针对对象的Weak Map 集合，添加非对象类型会报错
+5. Weak Map集合支持 set(), has(), delete() 方法
+6. Weak Map不支持遍历, 内部隐藏(不支持查看), 不支持foreach和size
+7. 对于应用场景来说, 存放对象的弱引用, 不用担心对象被回收后引发的问题
+
+```
+### 迭代器和生成器
+```
+迭代器
+1. 迭代器(Tterator),用于给数据结构提供统一的访问遍历的机制
+2. 生成器
+   function *cit(){
+   	yield 1;
+   	yield 2;
+   	yield 3;
+   }
+   
+3. 迭代对象的 .next() 方法, 类似指针，每次执行将下移一行
+   let it = cit();
+   console.log(it.next());  // { value: 1, done: false }
+   console.log(it.next());  // { value: 2, done: false }
+   console.log(it.next());  // { value: 3, done: false }
+   console.log(it.next()); // { value: undefined, done: true }
+   
+4. 生成器配合循环
+   function *fn(arr){
+   	for(let i=0; i<arr.length; i++){
+   		yield arr[i];
+   	}
+   }
+   
+   let it = fn([1,2,3])
+   console.log(it.next().value)  // 1
+   console.log(it.next().value)  // 2
+   console.log(it.next().value)  // 3
+   
+```
+```
+默认迭代接口
+1. Array, Map, Set 等拥有默认迭代接口
+2. 对于Array数组类型, 提供了 keys(), values(), entries()
+   let arr = [1,2,3,4,5]
+   console.log(arr.keys())  // Object [Array Iterator] {}
+   console.log(arr.values())  // Object [Array Iterator] {}
+   console.log(arr.entries())  // Object [Array Iterator] {}
+   
+3. for...of 迭代遍历
+   let arr = [1,2,3,4,5]
+   for(let i of arr.entries()){
+   	console.log(i)
+   }
+   // [ 0, 1 ]
+   // [ 1, 2 ]
+   // [ 2, 3 ]
+   // [ 3, 4 ]
+   // [ 4, 5 ]
+   
+4. 
+   
 ```
