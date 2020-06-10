@@ -396,4 +396,87 @@ es6语法,模块化及webpack打包
    let arr = [1,2,3,4,5];
    // 从0开始复制  值从索引2开始粘贴  参数3设置结束粘贴索引值
    console.log(arr.copyWithin(2,0))  // [ 1, 2, 1, 2, 3 ]
+   
+```
+### 对象的简写改进
+```
+1. ES6初始属性简写
+   function fn(name , age){
+   	return {name, age}
+   }
+   
+   console.log(fn('Mr.z',10))
+   
+2. ES6 对象中方法的简写
+   let obj = {
+   	// ES6的写法
+   	fn (){
+   		return 'es6'
+   	}
+   }
+   
+   console.log(obj.fn())
+
+```
+```
+表达式方案
+1. ES6允许对象字面量，使用表达式进行属性名称的拼装操作
+   let obj = {
+   	['user' + 'name'] : "Mr.z"
+   }
+   
+   console.log(obj.username)
+   
+2. ES6支持动态属性名称
+   let myName = 'name';
+   let obj = {
+   	[myName] : "Mr.z"
+   }
+   console.log(obj[myName])
+   console.log(obj.name)
+   
+3. ES6在对象字面量方法上，也支持拼装
+   let obj = {
+   	['f'+'n'](){
+   		return 'es6'
+   	}
+   };
+   console.log(obj.fn())
+   
+```
+### 对象的新增方法
+```
+1. ES6中提供了 Object.is() 来处理 ===（恒等）中的一些缺点
+   console.log(Object.is(NaN, NaN))   // true
+   console.log(Object.is(+0, -0))  // false
+   
+2. ES6提供了 Object.assign() 方法可以合并指定对象至目标对象内部
+   
+3. ES6提供了 Object.getPrototypeOf() 和 Object.setPrototypeOf()方法
+   var obj = {
+   	fn(){
+   		return 'fn'
+   	}
+   }
+   
+   let f = {};
+   Object.setPrototypeOf(f,obj)  // 设置f的原型对象为 obj
+   console.log(f.fn())
+   console.log(Object.getPrototypeOf(f) === obj)   // 检测obj是否是f的原型对象
+   
+4. ES6提供了super关键字，用于原型方法中的继承功能
+   var obj = {
+   	fn1(){
+   		return 'fn1'
+   	}
+   }
+   
+   let f = {
+   	fn(){
+   		return super.fn1() + ', extend'
+   	}
+   };
+   Object.setPrototypeOf(f,obj)  // 设置f的原型对象为 obj
+   console.log(f.fn())  // fn1, extend
+   
 ```
