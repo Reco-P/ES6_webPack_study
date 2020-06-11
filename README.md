@@ -131,8 +131,8 @@ es6语法,模块化及webpack打包
 ```
 1. ES6之前，函数是无法给参数设置默认值的， ES6支持了这一特性
    function fun(number = 100,age = 111){
-   	console.log(number);
-   	console.log(age);
+   	console.log(number); // 123
+   	console.log(age);  // [ 111, 222 ]
    }
    fun(123,[111,222]);
    
@@ -265,7 +265,7 @@ es6语法,模块化及webpack打包
 ```
 新增方法
 1. 处理超过两个字符（四字节）的异体字， ES6新增了 codePointAt（） 方法
-2. 对于超过两个字符的马甸，可以通过ES6新增的 String.fromCodePoint() 
+2. 对于超过两个字符的，可以通过ES6新增的 String.fromCodePoint() 
   console.log(String.fromCodePoint(134071));
    
 3. ES6提供的 normalize() 方法用于有音标的符号组合形成统一
@@ -275,9 +275,9 @@ es6语法,模块化及webpack打包
    console.log('abc'.endsWith('c'))  // true
    
 5. repeat() 重复字符串， padStart() 补全字符串头部, endStart() 补全字符串尾部
-   console.log('x'.repeat(2))
-   console.log('x'.padStart(2,'0'))   // 前补0，补全后一共两位
-   console.log('x'.padEnd(2,'0'))  // 尾补0，补全后一共两位
+   console.log('x'.repeat(2))  // xx
+   console.log('x'.padStart(2,'0'))   // 0x 前补0，补全后一共两位
+   console.log('x'.padEnd(2,'0'))  // x0 尾补0，补全后一共两位
 
 ```
 ```
@@ -483,7 +483,7 @@ es6语法,模块化及webpack打包
 ### Symbol类型和属性
 ```
 Symbol类型
-1. ES5新增了Symbol基础数据类型，表示独一无二的值，类似ID
+1. ES6新增了Symbol基础数据类型，表示独一无二的值，类似ID
    let str1 = Symbol();   // 不支持new Symbol
    let str2 = Symbol();
    console.log(str1 === str2)  // false
@@ -750,4 +750,64 @@ p1.then((value) => {
 3. 代理对象中任何未公开或者不存在的属性, 可自定义返回内容
 4. 代理可以阻止赋值的默认行为, 直接 return false
 
+```
+### 异步async
+```
+1. async也是处理异步的, 是对 Promise 的一种扩展, 让异步更加方便
+2. 优势: async是基于Promise 的, 虽然是异步操作, 淡看上去像同步
+   let as = async() => {
+   	let result = await p2;
+   	console.log(result)
+   };
+   
+   as();
+  
+3. 三个异步需要队列输出
+   async function as(){
+   	let r1 = await p1,
+   	    r2 = await p2,
+   		r3 = await p3;
+   		
+   	console.log(r1);
+   	console.log(r2);
+   	console.log(r3);
+   }
+   
+   as();
+   // 1.异步
+   // 2.异步
+   // 3.异步
+   
+   对比 Promise, 没有then, 精简许多
+   p1.then((value) => {
+   	console.log(value);  // 调用p1
+   	return p2;
+   }).then((value) => {
+   	console.log(value);  // 调用p2
+   	return p3;
+   }).then((value) => {
+   	console.log(value)  // 调用p3
+   });
+   
+4. await关键字只能在 async 函数内部, 否则不可识别
+    
+5. 批量异步队列, 类似Promise.all()
+   async function as(){
+   	let all = [await p1, await p2, await p3];
+   	console.log(all)   // [ '1.异步', '2.异步', '3.异步' ]
+   }
+   
+   as();
+   
+6. async如果设置了返回值, 这个值是 Promise 对象
+   async function as(){
+   	return 'async'
+   }
+   
+   console.log(as())  // Promise { 'async' }
+   
+   // 可以通过then() 得到
+   as().then((value) => {
+   	console.log(value)   // async
+   });
 ```
