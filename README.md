@@ -810,4 +810,159 @@ p1.then((value) => {
    as().then((value) => {
    	console.log(value)   // async
    });
+   
+```
+### 类class实现
+```
+1. 在ES6之前, javascript没有完整的类支持
+2. ES6之前采用了原型链实现面向对象的功能, ES6开始, 提供了真正的类语法
+3. 本质上内部实现和原型链还是一样的
+   class Person {
+   	// 构造函数（构造方法）
+   	constructor(arg) {
+   	    // this.arg是类的属性
+   		// 参数赋值给属性
+   	    this.arg = arg; 
+   	}
+   	
+   	// 普通方法
+   	run(){
+   		return '输出:'+this.arg;
+   	}
+   }
+   
+   // 实例化一个Person对象
+   let p = new Person('Mr.z');
+   console.log(p.run());  // 输出:Mr.z 
+   console.log(p.arg);  // Mr.z
+   console.log(p instanceof Person);  // true
+   console.log(typeof Person);  // function 说明 Person 本质上还是一个函数
+ 
+```
+```
+getter和setter
+1. 根据面向对象的三大定律中成员属性, 我们需要对它进行封装, 变成私有属性
+2. 目前的 this.arg, 基本是对外公开的, 可以在类外取值和赋值
+   class Person {
+   	#arg   // 私有声明
+   	// 构造函数（构造方法）
+   	constructor(arg) {
+   	    this.#arg = arg;  //私有属性, 类外无法访问
+   	}
+   	
+   	// 普通方法
+   	run(){
+   		return '输出:'+this.arg;
+   	}
+   }
+   
+   // 实例化一个Person对象
+   let p = new Person('Mr.z');
+   console.log(p.run());   // 输出:undefined
+   
+3. 添加 getter setter 方法
+   class Person {
+   	#arg   // 私有声明
+   	// 构造函数（构造方法）
+   	constructor(arg) {
+   	    this.#arg = arg;  //私有属性, 类外无法访问
+   	}
+   	
+   	get arg(){
+   		return this.#arg;
+   	}
+   	
+   	set arg(value){
+   		this.#arg = value;
+   	}
+   	
+   	// 普通方法
+   	run(){
+   		return '输出:'+this.arg;
+   	}
+   }
+   
+   // 实例化一个Person对象
+   let p = new Person('Mr.z');
+   p.arg = 'Mr.x';
+   console.log(p.arg);   // Mr.x
+   
+```
+### 类class继承
+```
+1. ES6也支持子类继承父类, 使用 extends 关键字实现
+2. 当子类继承父类, 实例化子类后, 就可以直接拥有父类的构造, 属性和方法
+   class Person {
+   	constructor(arg) {
+   	    this.arg = arg; 
+   	}
+   	
+   	run(){
+   		return '输出:'+this.arg;
+   	}
+   }
+   
+   class Children extends Person{
+   	
+   }
+   
+   let c = new Children('Mr.hahaha');
+   console.log(c.arg);   // Mr.hahaha
+   console.log(c.run());  // 输出:Mr.hahaha
+   
+3. 继承之后, 一般来说，我们需要覆写父类, 然后对子类进行增强
+   super 作为函数时, 调用父类构造, 作为对象时, 	在普通方法返回指定父类方法.    
+   class Person {
+   	constructor(arg) {
+   	    this.arg = arg; 
+   	}
+   	
+   	run(){
+   		return '输出:'+this.arg;
+   	}
+   }
+   
+   class Children extends Person{
+   	constructor(arg, age) {  // 覆写构造
+   		super(arg);  // 执行父类构造并传参
+   		this.age = age;
+   	}
+   	
+   	run(){  //覆写方法
+   		return super.run() + this.age;  // 执行父类方法并返回内容
+   	}
+   }
+   
+   let c = new Children('Mr.hahaha', 22);
+   console.log(c.run());   // 输出:Mr.hahaha22
+   
+4. 可以使用 Object.getPrototypeOf() 判断子类是否继承了父类
+   console.log(Object.getPrototypeOf(Children) === Person)  // true
+   
+5. ES6的类支持静态属性和方法, 也支持静态被子类继承（静态属性与方法可以直接调用, 不用实例化）
+   class Person {
+   	static gender = '男';
+   
+   }
+   
+   class Children extends Person{
+   
+   }
+   
+   console.log(Person.gender)  // 男
+   console.log(Children.gender)  //男
+   
+   覆写静态
+   class Person {
+   	static gender = '男';
+   
+   }
+   
+   class Children extends Person{
+   	static gender = '女';   // 覆写静态
+   }
+   
+   console.log(Person.gender)  // 男
+   console.log(Children.gender)  //女
+   
 ```
