@@ -754,7 +754,7 @@ p1.then((value) => {
 ### 异步async
 ```
 1. async也是处理异步的, 是对 Promise 的一种扩展, 让异步更加方便
-2. 优势: async是基于Promise 的, 虽然是异步操作, 淡看上去像同步
+2. 优势: async是基于Promise 的, 虽然是异步操作, 但看上去像同步
    let as = async() => {
    	let result = await p2;
    	console.log(result)
@@ -766,7 +766,7 @@ p1.then((value) => {
    async function as(){
    	let r1 = await p1,
    	    r2 = await p2,
-   		r3 = await p3;
+   	    r3 = await p3;
    		
    	console.log(r1);
    	console.log(r2);
