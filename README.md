@@ -966,3 +966,10 @@ getter和setter
    console.log(Children.gender)  //女
    
 ```
+### Moudle模块化
+```
+1. 浏览器加载, Node加载 
+   区别: 导入 浏览器加载(import * as obj from '/...js')
+             Node加载(commonJS规范, require（'/...js'）)  
+
+```
